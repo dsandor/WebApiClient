@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleWebApi.Monotouch
+namespace SimpleWebApi
 {
     /// <summary>
     /// Provides a simple async way to make requests to WebApi methods that return Json and ultimately strongly typed results.
