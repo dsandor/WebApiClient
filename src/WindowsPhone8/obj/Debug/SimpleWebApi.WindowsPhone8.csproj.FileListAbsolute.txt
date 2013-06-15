@@ -1,0 +1,6 @@
+C:\Projects\WebApiClient\src\WindowsPhone8\obj\Debug\SimpleWebApi.WindowsPhone8.csprojResolveAssemblyReference.cache
+C:\Projects\WebApiClient\src\WindowsPhone8\Bin\Debug\SimpleWebApi.WindowsPhone8.dll
+C:\Projects\WebApiClient\src\WindowsPhone8\Bin\Debug\SimpleWebApi.WindowsPhone8.pdb
+C:\Projects\WebApiClient\src\WindowsPhone8\Bin\Debug\Newtonsoft.Json.net45.wp8.win8.dll
+C:\Projects\WebApiClient\src\WindowsPhone8\obj\Debug\SimpleWebApi.WindowsPhone8.dll
+C:\Projects\WebApiClient\src\WindowsPhone8\obj\Debug\SimpleWebApi.WindowsPhone8.pdb
