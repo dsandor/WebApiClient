@@ -1,0 +1,6 @@
+C:\Projects\WebApiClient\src\SimpleWebApi\bin\Debug\SimpleWebApi.dll
+C:\Projects\WebApiClient\src\SimpleWebApi\bin\Debug\SimpleWebApi.pdb
+C:\Projects\WebApiClient\src\SimpleWebApi\bin\Debug\Newtonsoft.Json.net45.wp8.win8.dll
+C:\Projects\WebApiClient\src\SimpleWebApi\obj\Debug\SimpleWebApi.csprojResolveAssemblyReference.cache
+C:\Projects\WebApiClient\src\SimpleWebApi\obj\Debug\SimpleWebApi.dll
+C:\Projects\WebApiClient\src\SimpleWebApi\obj\Debug\SimpleWebApi.pdb
