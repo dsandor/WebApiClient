@@ -1,6 +1,7 @@
 C:\Projects\WebApiClient\src\Net40\bin\Debug\SimpleWebApi.Net40.dll
 C:\Projects\WebApiClient\src\Net40\bin\Debug\SimpleWebApi.Net40.pdb
-C:\Projects\WebApiClient\src\Net40\bin\Debug\Newtonsoft.Json.net40.dll
 C:\Projects\WebApiClient\src\Net40\obj\Debug\SimpleWebApi.Net40.csprojResolveAssemblyReference.cache
 C:\Projects\WebApiClient\src\Net40\obj\Debug\SimpleWebApi.Net40.dll
 C:\Projects\WebApiClient\src\Net40\obj\Debug\SimpleWebApi.Net40.pdb
+C:\Projects\WebApiClient\src\Net40\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\WebApiClient\src\Net40\bin\Debug\Newtonsoft.Json.xml

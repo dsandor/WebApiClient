@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Dynamic;
+using System.Security.Cryptography;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace SimpleWebApi
 {
@@ -45,7 +48,7 @@ namespace SimpleWebApi
         /// <returns>A strongly typed object that was returned from te WebApi call.</returns>
         public static Task<TReturnType> Post<TReturnType, TRequestType>(string apiUrl, string authToken, TRequestType request)
         {
-            string data = JsonConvert.SerializeObject(request);
+            var data = JsonConvert.SerializeObject(request);
             return Post<TReturnType>(apiUrl, authToken, data);
         }
 
@@ -83,7 +86,7 @@ namespace SimpleWebApi
         /// <returns>A strongly typed object returned from the WebApi call.</returns>
         private static Task<TReturnType> Post<TReturnType>(WebClient webClient, Uri uri, string data)
         {
-            TReturnType returnObject = default(TReturnType);
+            var returnObject = default(TReturnType);
 
             var taskCompletionSource = new TaskCompletionSource<TReturnType>();
 
@@ -118,7 +121,7 @@ namespace SimpleWebApi
         /// <param name="apiUrl">The API URL.</param>
         /// <param name="authToken">The auth token.</param>
         /// <returns>A strongly typed object returned from the WebApi call.</returns>
-        public static Task<TReturnType> Get<TReturnType>(string apiUrl, string authToken)
+        public static Task<TReturnType> Get<TReturnType>(string apiUrl, string authToken, int i)
         {
             var webClient = new WebClient();
 
@@ -135,10 +138,55 @@ namespace SimpleWebApi
         /// <param name="apiUrl">The API URL.</param>
         /// <param name="headers">The headers.</param>
         /// <returns>A strongly typed object returned from the WebApi call.</returns>
-        public static Task<TReturnType> Get<TReturnType>(string apiUrl, Dictionary<string, string> headers)
+        //public static Task<TReturnType> Get<TReturnType>(string apiUrl, Dictionary<string, string> headers)
+        //{
+        //    var webClient = new WebClient();
+        //    var uri       = new Uri(apiUrl);
+
+        //    if (headers != null)
+        //    {
+        //        foreach (var key in headers.Keys)
+        //        {
+        //            webClient.Headers[key] = headers[key];
+        //        }
+        //    }
+
+        //    return Get<TReturnType>(webClient, uri);
+        //}
+
+        /// <summary>
+        /// Gets the specified web client.
+        /// </summary>
+        /// <typeparam name="TReturnType">The type of the return type.</typeparam>
+        /// <param name="apiUrl">The URL to the webapi call.</param>
+        /// <param name="queryStringParameters">Parameters for the get which are placed on the Uri as querystring parameters. E.g. http://someuri/somepath?param1=value1&param2=value2
+        ///     Pass a dynamic object in here and the properties are mapped to the querystring.  If you pass in a querystring "?param1=value1&param2=value2" then 
+        ///     that string will be appended to the uri.  Please note that urlencoding is your own responsibility if you pass in the querystring as a string.  When
+        ///     a dynamic object is passed in the name and values are UrlEncoded automatically.
+        /// </param>
+        /// <returns>A strongly typed object returned from the WebApi call.</returns>
+        public static Task<TReturnType> Get<TReturnType>(string apiUrl, Dictionary<string, string> headers = null, dynamic queryStringParameters = null)
         {
+            var parameters = queryStringParameters as object;
+            string queryString;
+
+            if (parameters != null && !(parameters is string))
+            {
+                var queryStringBuilder = new StringBuilder("?");
+
+                foreach (var property in parameters.GetType().GetProperties())
+                {
+                    queryStringBuilder.AppendFormat("{0}={1}&", property.Name, property.GetValue(parameters, null));
+                }
+
+                queryString = queryStringBuilder.Remove(queryStringBuilder.Length - 1, 1).ToString();
+            }
+            else
+            {
+                queryString = queryStringParameters as string;
+            }
+
             var webClient = new WebClient();
-            var uri       = new Uri(apiUrl);
 
             if (headers != null)
             {
@@ -147,6 +195,8 @@ namespace SimpleWebApi
                     webClient.Headers[key] = headers[key];
                 }
             }
+
+            var uri = new Uri(apiUrl + queryString);
 
             return Get<TReturnType>(webClient, uri);
         }
@@ -160,8 +210,8 @@ namespace SimpleWebApi
         /// <returns>A strongly typed object returned from the WebApi call.</returns>
         private static Task<TReturnType> Get<TReturnType>(WebClient webClient, Uri uri)
         {
-            TReturnType returnObject = default(TReturnType);
-            
+            var returnObject = default(TReturnType);
+
             var taskCompletionSource = new TaskCompletionSource<TReturnType>();
 
             webClient.Headers["Accept"] = "application/json";
@@ -173,7 +223,7 @@ namespace SimpleWebApi
                 try
                 {
                     returnObject = JsonConvert.DeserializeObject<TReturnType>(result);
-                    
+
                     taskCompletionSource.SetResult(returnObject);
                 }
                 catch (Exception ex)
