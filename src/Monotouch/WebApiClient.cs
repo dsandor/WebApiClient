@@ -132,29 +132,6 @@ namespace SimpleWebApi
         }
 
         /// <summary>
-        /// Gets the specified API URL.
-        /// </summary>
-        /// <typeparam name="TReturnType">The type of the return type.</typeparam>
-        /// <param name="apiUrl">The API URL.</param>
-        /// <param name="headers">The headers.</param>
-        /// <returns>A strongly typed object returned from the WebApi call.</returns>
-        //public static Task<TReturnType> Get<TReturnType>(string apiUrl, Dictionary<string, string> headers)
-        //{
-        //    var webClient = new WebClient();
-        //    var uri       = new Uri(apiUrl);
-
-        //    if (headers != null)
-        //    {
-        //        foreach (var key in headers.Keys)
-        //        {
-        //            webClient.Headers[key] = headers[key];
-        //        }
-        //    }
-
-        //    return Get<TReturnType>(webClient, uri);
-        //}
-
-        /// <summary>
         /// Gets the specified web client.
         /// </summary>
         /// <typeparam name="TReturnType">The type of the return type.</typeparam>
